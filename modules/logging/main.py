@@ -2,15 +2,13 @@ import os
 import sys
 from modules.logging.loggingInitializer import *
 from modules.logging.module2 import *
+from modules.logging.loggingInitializer import *
+from modules.logging.main2 import *
 
-def main():
-    logging = initialize_logger(".")
-    logging.info("INFO LOG")
-    logging.info("WARN LOG")
-    logging.debug("DEBUG LOG")
+def loggingInitializer():
+    logger = initialize_logger(".")
+    logger.info("Test logging: Main file")
 
-    module2class = sampleClass()
-    module2class = sampleClass()
-
-main()
+loggingInitializer()
+main2 = main2()
 

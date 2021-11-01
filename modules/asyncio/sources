@@ -1,0 +1,59 @@
+https://www.youtube.com/watch?v=nFn4_nA_yk8
+https://github.com/PatrickAlphaC/async-python
+https://www.educative.io/blog/python-concurrency-making-sense-of-asyncio
+https://stackoverflow.com/questions/49005651/how-does-asyncio-actually-work
+https://www.velotio.com/engineering-blog/async-features-in-python
+https://bbc.github.io/cloudfit-public-docs/asyncio/asyncio-part-1.html
+https://faculty.ai/tech-blog/a-guide-to-using-asyncio/
+
+
+
+
+asyncio
+async def
+await
+task
+create_task
+future
+asyncio.run
+event loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Corouting:
+Coroutines are a kind of concurrent programming that works collaboratively. Each coroutine is a line of execution that can suspend its control of the program to allow another coroutine to run.  This is particularly useful when a coroutine is waiting for something like a network request to complete – in this case execution of that coroutine cannot continue, but other useful work could be done by other coroutines.
+
+
+
+event_loops
+    coroutines
+        await
+
+
+
+Asyncio is not one of these
+
+Using asyncio in your Python code will not make your code multithreaded. It will not cause multiple Python instructions to be executed at once, and it will not in any way allow you to sidestep the so-called “global interpreter lock”.
+
+That’s just not what asyncio is for.
+
+TERMINOLOGY ICON TERMINOLOGY: Some processes are CPU-bound: they consist of a series of instructions which need to be executed one after another until the result has been computed. All of the time they are running is time that they are making full use of the computer’s facilities (give or take).
+
+Other processes, however, are IO-bound: they spend a lot of time sending and receiving data from external devices or processes, and hence often need to start an operation and then wait for it to complete before carrying on. During the waiting they aren’t doing very much.
+
+When a program is running IO-bound code it’s pretty common for the CPU to spend a lot of time doing nothing at all because the one thing that’s currently being done is waiting for something elsewhere.
+
+It’s also pretty common to find that your program has a variety of other work it could be getting on with whilst this waiting is occurring, work which doesn’t depend upon the thing being waited for. So asyncio is designed to allow you to structure your code so that when one piece of linear single-threaded code (called a “coroutine”) is waiting for something to happen another can take over and use the CPU.
+
+It’s not about using multiple cores, it’s about using a single core more efficiently
