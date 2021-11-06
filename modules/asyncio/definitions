@@ -1,0 +1,220 @@
+asyncio:
+Using asyncio in your Python code will not make your code multithreaded. It will not cause multiple Python instructions to be executed at once, and it will not in any way allow you to sidestep the so-called “global interpreter lock”.
+
+That’s just not what asyncio is for.
+
+TERMINOLOGY ICON TERMINOLOGY: Some processes are CPU-bound: they consist of a series of instructions which need to be executed one after another until the result has been computed. All of the time they are running is time that they are making full use of the computer’s facilities (give or take).
+
+Other processes, however, are IO-bound: they spend a lot of time sending and receiving data from external devices or processes, and hence often need to start an operation and then wait for it to complete before carrying on. During the waiting they aren’t doing very much.
+
+When a program is running IO-bound code it’s pretty common for the CPU to spend a lot of time doing nothing at all because the one thing that’s currently being done is waiting for something elsewhere.
+
+It’s also pretty common to find that your program has a variety of other work it could be getting on with whilst this waiting is occurring, work which doesn’t depend upon the thing being waited for. So asyncio is designed to allow you to structure your code so that when one piece of linear single-threaded code (called a “coroutine”) is waiting for something to happen another can take over and use the CPU.
+
+It’s not about using multiple cores, it’s about using a single core more efficiently
+
+
+asyncio:
+process:
+    cpu bound:
+        they consist of a series of instructions which need to be executed one after another until the result has been computed. All of the time they are running is time that they are making full use of the computer’s facilities (give or take).
+    io-bound:
+        they spend a lot of time sending and receiving data from external devices or processes, and hence often need to start an operation and then wait for it to complete before carrying on. During the waiting they aren’t doing very much.
+When a program is running IO-bound code it’s pretty common for the CPU to spend a lot of time doing nothing at all because the one thing that’s currently being done is waiting for something elsewhere.
+It’s not about using multiple cores, it’s about using a single core more efficiently
+
+
+
+async def:
+#The most basic tool in the tool kit of an asynchronous programmer in Python is the new keyword async def, which is used to declare an asynchronous coroutine function in the same way that def is used to define a normal synchronous function.
+
+TERMINOLOGY ICON TERMINOLOGY: In this article I will refer to async def as a keyword, and in future articles I will refer to async for and async with as keywords. Strictly speaking this isn’t true. In fact async is a keyword and so is def, but since you can’t use async by itself, only in combination with another keyword I think it’s much more convenient and less confusing to think of async def as a single keyword that happens to have a space in the middle of it. It certainly behaves like one in terms of language usage.
+
+So for example:
+
+async def example_coroutine_function(a, b):
+    # Asynchronous code goes here
+    ...
+
+def example_function(a, b):
+    # Synchronous code goes here
+    ...
+In the above example we define a coroutine function example_coroutine_function and an ordinary function example_function. The code block that forms the body of the definition is slightly different in the two cases. The code block for example_function is ordinary synchronous Python, whilst the code-block for example_coroutine_function is asynchronous Python.
+
+IMPORTANT ICON IMPORTANT!:
+
+Asynchronous Python code can only be included inside a suitable context that allows it, which almost always means inside a coroutine function defined using async def. There’s one other context where asynchronous code is allowed which we will cover in the next article.
+Asynchronous Python code can use any of the Python keywords, structures, etc… allowed in ordinary Python. Nothing is disallowed (although some things may be discouraged, see later).
+There are several new keywords which can only be used inside asynchronous code: await, async with and async for.
+Note that async def is not one of the keywords reserved for use in asynchronous code. It can be used anywhere were def can be used, though its effect is slightly different.
+A declaration of a coroutine function using async def looks deceptively similar to the declaration of an ordinary function using def. Most of the time writing one is pretty similar, however there are some key differences, which are very important for asynchronous programming:
+
+
+
+
+coroutine:
+#TERMINOLOGY: It’s pretty common for people to be sloppy in their terminology and use the word “coroutine” to refer to any of three things:
+
+The code block of asynchronous code inside an async def statement.
+The callable object that the async def statement creates.
+The object of class Coroutine that is returned by the callable object when it is called.
+In this series I will try to keep it clear which of these I’m talking about at any particular point. In particular I will usually say “coroutine object” for an object of class Coroutine, and “coroutine function” for the callable that returns it. When I need to refer to the code block specifically (which is not often) I will refer to it as a “code block inside an async def statement which defines a coroutine function”.
+
+TYPING NOTE ICON TYPING NOTE: If you are using the typing library then the declaration of coroutine functions can be a little confusing at times.
+
+async def example_coroutine_function(a: A, b: B) -> C:
+  ...
+defines example_coroutine_function as a callable that takes two parameters of types A and B and returns an object of type Coroutine[Any, Any, C]. It’s pretty rare that you’ll need to refer to this return type explicitly.
+
+If you’re curious about the two Any type parameters in the above definition they’re related to the way that the event loop works. The first type parameter actually indicates the type of the values that the coroutine will pass to the event loop whenever it yields, whilst the second represents the type of the values that the event loop will pass back to the coroutine whenever the it is reawakened. In practice the actual types of these objects are determined by the internal machinery of the event loop’s implementation, and should never need to be referred to explicitly in client code unless you are writing your own event loop implementation (which is a pretty advanced topic way beyond the scope of these articles).
+
+
+
+await:
+It can only be used inside asynchronous code blocks (ie. in the code block of an async def statement defining a coroutine function), and it is used as an expression which takes a single parameter and returns a value.
+
+await:
+#One of the new keywords added to the language to support asyncio is await. This keyword is, in many ways, the very core of asynchronous code. It can only be used inside asynchronous code blocks (ie. in the code block of an async def statement defining a coroutine function), and it is used as an expression which takes a single parameter and returns a value.
+
+awaitable objects:
+A Coroutine object. When awaited it will execute the code-block of the coroutine in the current Task. The await statement will return the value returned by the code block.
+Any object of class asyncio.Future which when awaited causes the current Task to be paused until a specific condition occurs (see next section).
+An object which implements the magic method __await__, in which case what happens when it is awaited is defined by that method.
+
+
+Eg.
+
+    r = await a
+is a valid Python statement which will perform the await action on the object a and return a value which will be assigned to r. Exactly what will happen when this await statement is executed will depend upon what the object a is.
+
+A coroutine object is “awaitable” (it can be used in an await statement). Recall that when you are executing asynchronous code you are always doing so in the context of a “Task”, which is an object maintained by the Event Loop, and that each Task has its own call stack. The first time a Coroutine object is awaited the code block inside its definition is executed in the current Task, with its new code context added to the top of the call stack for this Task, just like a normal function call. When the code block reaches its end (or otherwise returns) then execution moves back to the await statement that called it. The return value of the await statement is the value returned by the code block. If a Coroutine object is awaited a second time this raises an exception. In this way you can think of awaiting a Coroutine object as being very much like calling a function, with the notable difference that the Coroutine object’s code block can contain asynchronous code, and so can pause the current task during running, which a function’s code block cannot.
+
+In fact there are three types of objects that are awaitable:
+
+A Coroutine object. When awaited it will execute the code-block of the coroutine in the current Task. The await statement will return the value returned by the code block.
+Any object of class asyncio.Future which when awaited causes the current Task to be paused until a specific condition occurs (see next section).
+An object which implements the magic method __await__, in which case what happens when it is awaited is defined by that method.
+That last one is there so that writers of libraries can create their own new classes of objects which are awaitable and do something special when awaited. It’s usually a good idea to make your custom awaitable objects either behave like a Coroutine object or like a Future object, and document which in the class’s doc strings. Making custom awaitable classes like this is a somewhat more advanced topic, though one that may come up when writing asyncio wrappers for synchronous io libraries, for example.
+
+TYPING NOTE ICON TYPING NOTE: If you are using typing then there is an abstract class Awaitable which is generic, so that Awaitable[R] for some type R means “anything which is awaitable, and when used in an await statement will return something of type R”.
+
+One of the most important points to get across is that the currently executing Task cannot be paused by any means other than awaiting a future (or a custom awaitable object that behaves like one). And that is something which can only happen inside asynchronous code. So any await statement might cause your current task to pause, but is not guaranteed to. Conversely any statement which is not an await statement (or an async for or async with under certain circumstances which will be explained in the next post) cannot cause your current Task to be paused.
+
+This means that the traditional multithreaded code problems of data races where different threads of execution both alter the same value are severely reduced in asynchronous code, but not entirely eliminated. In particular for the purposes of data shared between Tasks on the same event loop all synchronous code can be considered “atomic”. To illustrate what this means consider the following code:
+
+
+
+
+future:
+A Future object is a type of awaitable. Unlike a coroutine object when a future is awaited it does not cause a block of code to be executed. Instead a future object can be thought of as representing some process that is ongoing elsewhere and which may or may not yet be finished.
+
+When you await a future the following happens:
+
+If the process the future represents has finished and returned a value then the await statement immediately returns that value.
+If the process the future represents has finished and raised an exception then the await statement immediately raises that exception.
+If the process the future represents has not yet finished then the current Task is paused until the process has finished. Once it is finished it behaves as described in the first two bullet points here.
+All Future objects f have the following synchronous interface in addition to being awaitable:
+
+f.done() returns True if the process the future represents has finished.
+f.exception() raises an asyncio.InvalidStateError exception if the process has not yet finished. If the process has finished it returns the exception it raised, or None if it terminated without raising.
+f.result() raises an asyncio.InvalidStateError exception if the process has not yet finished. If the process has finished it raises the exception it raised, or returns the value it returned if it finished without raising.
+It’s important to note that there is no way for a future that is done to ever change back into one that is not yet done. A future becoming done is a one-time occurrence.
+
+IMPORTANT ICON IMPORTANT!: The distinction between a Coroutine and a Future is important. A Coroutine’s code will not be executed until it is awaited. A future represents something that is executing anyway, and simply allows your code to wait for it to finish, check if it has finished, and fetch the result if it has.
+
+IMPORTANT ICON IMPORTANT!: Objects which implement the __await__ magic method may do almost anything when awaited. They might behave more like Coroutines, or more like Futures. They may do something else entirely. The documentation for the class in question should usually make it clear what their behaviour is.
+
+You probably won’t create your own futures very often unless you are implementing new libraries that extend asyncio. However you will find that library functions often return futures. If you do need to create your own future directly you can do it with a call to
+
+f = asyncio.get_event_loop().create_future()
+On the other hand you will probably find that you use a related method, create_task quite often …
+
+TYPING NOTE ICON TYPING NOTE: If you want to specify that a variable is a Future then you can use the asyncio.Future class as a type annotation. If you want to specify that the Future’s result should be of a specific type, R then you can use the following notation:
+
+f: asyncio.Future[R]
+(in Python 3.6 you will need to wrap asyncio.Future[R] in quotes for this to work correctly, but in later versions of Python this is no longer needed).
+
+
+
+task:
+#As described in the previous article each event loop contains a number of tasks, and every coroutine that is executing is doing so inside a task. So the question of how to create a task seems like an important one.
+
+Creating a task is a simple matter, and can be done entirely in synchronous code:
+
+async def example_coroutine_function():
+    ...
+
+t = asyncio.create_task(example_coroutine_function())
+NOTE ICON NOTE: In Python 3.6 the function asyncio.create_task is not available, but you can still create a task using:
+
+t = asyncio.get_event_loop().create_task(example_coroutine_function())
+this is exactly the same, but a little more verbose.
+
+The method create_task takes a coroutine object as a parameter and returns a Task object, which inherits from asyncio.Future. The call creates the task inside the event loop for the current thread, and starts the task executing at the beginning of the coroutine’s code-block. The returned future will be marked as done() only when the task has finished execution. As you might expect the return value of the coroutine’s code block is the result() which will be stored in the future object when it is finished (and if it raises then the exception will be caught and stored in the future).
+
+Creating a task to wrap a coroutine is a synchronous call, so it can be done anywhere, including inside synchronous or asynchronous code. If you do it in asynchronous code then the event loop is already running (since it is currently executing your asynchronous code), and when it next gets the opportunity (ie. next time your current task pauses) it might make the new task active.
+
+When you do it in synchronous code, however, chances are that the event loop is not yet running, so you need to actually run it to make the code execute. There are two methods for doing this:
+
+asyncio.get_event_loop().run_forever()
+will cause the event loop to run forever (or until explicitly killed). This isn’t usually particularly useful. Much more useful is:
+
+r = asyncio.get_event_loop().run_until_complete(f)
+which takes a single parameter. If the parameter is a future (such as a task) then the loop will be run until the future is done, returning its result or raising its exception. So putting it together:
+
+async def example_coroutine_function():
+    ...
+
+loop = asyncio.get_event_loop()
+t = loop.create_task(example_coroutine_function())
+r = loop.run_until_complete(t)
+will create a new task which executes example_coroutine_function inside the event loop until it finishes, and then return the result.
+
+In fact this can be simplified further since if you pass a coroutine object as the parameter to run_until_complete then it automatically calls
+
+
+
+
+coroutine:
+Coroutines are a kind of concurrent programming that works collaboratively. Each coroutine is a line of execution that can suspend its control of the program to allow another coroutine to run. This is particularly useful when a coroutine is waiting for something like a network request to complete – in this case execution of that coroutine cannot continue, but other useful work could be done by other coroutines.
+
+
+Implementation of a coroutine programming system requires some way of code releasing control of the program and being resumed at a later time (we will cover the syntax for this in Python below), but also requires a system for managing the execution of active coroutines. This is typically achieved with an event loop. The event loop keeps track of active coroutines, and when one releases control, the event loop will pass control to another.
+
+
+
+event loop:
+You’re free to use whichever event loop implementation you like, however the standard library provides asyncio, a popular choice that a lot of third-party tools such as aiohttp have been built on top of. To run our coroutine with asyncio, get an event loop and pass it the coroutine object we got above:
+
+Note: Python 3.7 added asyncio.run(), which creates an event loop and runs a coroutine on it for you. In this case the above example becomes simply asyncio.run(example()). In the rest of the example I’ll use asyncio.run(), assuming Python 3.7 or later, but you can adapt the code to create a loop and call its run_until_complete() method if using older Python versions.
+
+
+
+
+
+
+
+asyncio task:
+Well, this all happens because asyncio doesn’t start the execution of a coroutine until one is explicitly registered with it (such as with asyncio.run()) or you await it in another coroutine. If we want to start multiple coroutines and have them run concurrently as above, we can either use asyncio.gather() as in the earlier example, or schedule them individually with asyncio.create_task():
+
+import asyncio
+
+async def print_after(message, delay):
+    """Print a message after the specified delay (in seconds)"""
+    await asyncio.sleep(delay)
+    print(message)
+
+async def main():
+    # Start coroutine twice (hopefully they start!)
+    first_awaitable = asyncio.create_task(print_after("world!", 2))
+    second_awaitable = asyncio.create_task(print_after("Hello", 1))
+    # Wait for coroutines to finish
+    await first_awaitable
+    await second_awaitable
+
+asyncio.run(main())
+The adapted snippet above starts running the coroutines immediately and waits for them to finish, resulting in “Hello” getting printed first as expected:
+
+Hello
+world!
+Note: asyncio.create_task() was introduced in Python 3.7. In older versions of Python, use asyncio.ensure_future() instead.
