@@ -1,0 +1,33 @@
+Steps:
+
+1.Create a new Repo
+2.Add Readme, License, Makefile, Dockerfile, Jenkinsfile, tests folder, package folder
+3.Add __init__.py files in packages
+4.Jot down all the required functions to be implemented
+5.Group functions together to form modules/Classes
+6.Group modules together to form packages
+7.Write logic for all functions
+8.Add logging module
+9.Add try catch modules
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
