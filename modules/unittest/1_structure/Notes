@@ -1,0 +1,21 @@
+
+Unit testing structure:
+    src
+        app.py
+    tests
+        test_app.py
+
+
+
+
+How to run tests:
+1. Add the below code:
+
+if __name__ == '__main__':
+	unittest.main()
+
+and run the file as simple python file
+
+
+2.
+python -m unittest filename
