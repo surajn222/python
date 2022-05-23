@@ -9,12 +9,14 @@ moderate:
     https://yeraydiazdiaz.medium.com/what-the-mock-cheatsheet-mocking-in-python-6a71db997832 - example 4 - moderate
     https://medium.com/python-pandemonium/python-mocking-you-are-a-tricksy-beast-6c4a1f8d19b2 -  moderate
     https://qxf2.com/blog/unit-testing-using-mock-python/ - unit test example - moderate
+    https://aaronlelevier.github.io/python-unit-testing-with-magicmock/
+    https://santexgroup.com/wp-content/uploads/2014/10/mock_python.html#slide18
 
 advanced:
     https://www.fugue.co/blog/2016-02-11-python-mocking-101  - patch examples - advanced
     https://chase-seibert.github.io/blog/2015/06/25/python-mocking-cookbook.html - advanced
     https://medium.com/geekculture/right-way-to-test-mock-and-patch-in-python-b02138fc5040 - advanced
-    https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c - advanced
+    https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c - advanced - pytest mock
 
 NA:
     https://peterkogan.medium.com/mocking-in-python-has-never-been-easier-5f9b15e1498f - NA
