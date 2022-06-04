@@ -1,0 +1,22 @@
+https://github.com/thp/minidb/blob/master/test/test_minidb.py
+
+1. import required packages and modules
+2. instantiate classes
+3. class instantiate unit tests
+4. different types of instantiations
+5. different types of exceptions
+6. invalid arguments etc
+7. different types of parameters
+8. multiple values, no values
+
+
+https://github.com/msiemens/tinydb/blob/master/tests/conftest.py
+
+1. conftest
+2.
+
+
+https://github.com/tuxmonk/pupdb/blob/master/tests/test_basic.py
+
+1. fixtures
+2. autouse
