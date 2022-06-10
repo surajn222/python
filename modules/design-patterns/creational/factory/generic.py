@@ -1,3 +1,10 @@
+# AbstractClass -> abstract_method_1, abstract_method_2
+# ConcreteClass1 -> abstract_method_1, abstract_method_2
+# ConcreteClass2 -> abstract_method_1, abstract_method_2
+#
+# Factory -> create_object returns -> ConcreteClass1, ConcreteClass2, ConcreteClass3
+# client -> factory.create_object
+
 import abc
 class AbstractClass(metaclass=abc.ABCMeta):
     @abc.abstractmethod

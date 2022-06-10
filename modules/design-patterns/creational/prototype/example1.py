@@ -1,0 +1,1 @@
+# https://stackabuse.com/the-prototype-design-pattern-in-python/

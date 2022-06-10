@@ -1,0 +1,1 @@
+# https://stackabuse.com/the-bridge-design-pattern-in-python/

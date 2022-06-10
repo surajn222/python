@@ -1,0 +1,1 @@
+# https://www.geeksforgeeks.org/facade-method-python-design-patterns/

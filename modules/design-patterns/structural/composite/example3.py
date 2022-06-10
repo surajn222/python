@@ -1,0 +1,1 @@
+# https://pythonwife.com/composite-design-pattern-with-python/

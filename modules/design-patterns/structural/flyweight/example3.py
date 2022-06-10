@@ -1,0 +1,1 @@
+# https://pythonwife.com/flyweight-design-pattern-with-python/

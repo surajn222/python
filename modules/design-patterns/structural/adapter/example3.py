@@ -1,0 +1,1 @@
+# https://medium.com/@mrfksiv/python-design-patterns-04-the-facade-6cfe67033354

@@ -1,0 +1,1 @@
+# https://www.geeksforgeeks.org/proxy-method-python-design-patterns/

@@ -1,0 +1,1 @@
+# https://refactoring.guru/design-patterns/composite/python/example#:~:text=Composite%20is%20a%20structural%20design,require%20building%20a%20tree%20structure.
