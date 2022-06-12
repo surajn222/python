@@ -29,7 +29,6 @@ class AbstractClass2(ABC):
         pass
 
 
-
 class ConcretClass1AbstactClass1(AbstractClass1):
     """
     Type: Concrete Product

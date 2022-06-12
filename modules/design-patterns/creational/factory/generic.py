@@ -4,8 +4,8 @@
 #
 # Factory -> create_object returns -> ConcreteClass1, ConcreteClass2, ConcreteClass3
 # client -> factory.create_object
-
 import abc
+
 class AbstractClass(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def abstract_method_1(self):
