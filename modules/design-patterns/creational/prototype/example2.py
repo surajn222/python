@@ -3,7 +3,6 @@
 from abc import ABCMeta, abstractmethod
 import copy
 
-
 # class - Courses at GeeksforGeeks
 class Courses_At_GFG(metaclass=ABCMeta):
 

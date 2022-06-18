@@ -1,0 +1,1 @@
+When there are multiple subsystems, you collect one function from each sub system and add it to the facade class

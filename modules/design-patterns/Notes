@@ -1,0 +1,21 @@
+Order of complexity
+
+facade
+adapter
+decorator
+bridge
+iterator
+composite
+
+abstract
+singleton
+prototype
+builder
+
+strategy
+template
+observer
+
+
+flywieght
+proxy

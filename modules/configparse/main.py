@@ -3,6 +3,7 @@
 import configparser
 
 config = configparser.ConfigParser()
+config.optionxform=str
 config.read('db.ini')
 
 #Method 1

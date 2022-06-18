@@ -1,3 +1,12 @@
+# SingletonGovt
+#   __instance_ = None
+#
+#   __init__
+#
+#   get_instance:
+#
+
+
 class SingletonGovt:
    # This is the single instance that will be used by all objects. We have to return this.
    __instance__ = None
@@ -14,7 +23,7 @@ class SingletonGovt:
    def get_instance():
        """ Static method to fetch the current instance.
        """
-       if not SingletonGovt.__instance__:
+       if SingletonGovt.__instance__ is None:
            SingletonGovt()
        return SingletonGovt.__instance__
 
