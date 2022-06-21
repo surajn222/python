@@ -75,7 +75,7 @@ def check_for_word_preset_in_files(list_git_repos, df, word):
 				for line in lines:
 					line = str(line)
 					if word in line:
-						df.loc[df['repos'] == repo, word] = '1'
+						df.loc[df['repos'] == repo, word] = file
 						break
 			break
 
@@ -84,13 +84,14 @@ def check_for_word_preset_in_files(list_git_repos, df, word):
 
 
 def check_for_word_absent_in_files(list_git_repos, df, word):
-	df[word + str("_absent")] = '1'
+
 	for repo in list_git_repos:
 		folder = repo.split("/")[4]
 		print(folder)
 
 		for dirpath, dnames, fnames in os.walk("./repos/" + str(folder) + "/tests/"):
 			for file in fnames:
+				df.loc[df['repos'] == repo, word + str("_absent")] = '1'
 				print("FILE ----- " + str(file))
 				if str(file) != "__init__.py":
 					file = "./repos/" + str(folder) + "/tests/" + str(file)
@@ -128,6 +129,8 @@ def main():
 	df = check_for_word_preset_in_files(list_git_repos, df, "fixture")
 	df = check_for_word_preset_in_files(list_git_repos, df, "pytest")
 	df = check_for_word_preset_in_files(list_git_repos, df, "unittest")
+	df = check_for_word_preset_in_files(list_git_repos, df, "parametrize")
+	df = check_for_word_preset_in_files(list_git_repos, df, "except ")
 
 
 
@@ -135,7 +138,7 @@ def main():
 	df  = check_for_word_absent_in_files(list_git_repos, df, "unittest")
 	#print(df)
 	#pytest_df = df["pytest"]=="1"
-	pytest_df = df.loc[df['pytest'] == "1"]
+	pytest_df = df.loc[df['pytest'] != "0"]
 
 	print(pytest_df)
 
