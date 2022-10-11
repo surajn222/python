@@ -1,0 +1,4 @@
+setuptools==49.6.0
+wheel
+grpcio
+grpcio-tools

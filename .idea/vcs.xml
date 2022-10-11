@@ -2,5 +2,57 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/design-patterns/creational/prototype/spark" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/LightDB" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/ZODB" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/aws-data-wrangler" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/cerberus" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/chronyk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/dask" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/dateutil" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/delorean" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/easy_db" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/flata" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/httpie" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/huey" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/instadb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/json_database" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/jsondb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/jsonschema" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/maya" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/minidb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/moment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pendulum" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pickledb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pupdb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/py-jsonq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pydal" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pysiq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pysonDB" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pysqa" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/python-db-to-json" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/python-redisqueue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/python-validation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/pytime" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/rq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/s3cmd" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/s3csv_fdw" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/s4cmd" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/scala" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/schedule" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/schema" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/schematics" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/simplegraphdb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/spark" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/tinydb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/trio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/uvloop" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/validator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/validators" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/valideer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/validr" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/voluptuous" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/organise-unittest/repos/when.py" vcs="Git" />
   </component>
 </project>
